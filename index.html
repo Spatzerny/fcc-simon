@@ -1,66 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-	<meta charset="UTF-8">
-	<title>Document</title>
-	<script src="jquery-3.1.0.js"></script>
-	<link rel="stylesheet" href="style.css">
-</head>
+	<head>
+		<meta charset="UTF-8">
+		<title>Document</title>
+		<script src="jquery-3.1.0.js"></script>
+		<link rel="stylesheet" href="style.css">
+	</head>
 
-<body>
-	<button id="go">go</button>
-	<div id="btns" class='s'>
+	<body>
+		<button id="go">go</button>
 
-		<div id="cell_0" class="cell">
-			<div class="anim"></div>
-			<button class="btn btn-note"></button>
-			<audio src="audio/107282__menegass__b-a0.wav"></audio>
+		<div id="btns" class='s'>
+
+			<div id="cell_0" class="cell cell-note">
+				<div class="anim"></div>
+				<button data-note-id="0" class="btn btn-note"></button>
+				<audio src="audio/a.wav"></audio>
+			</div>
+
+			<div id="cell_1" class="cell cell-note">
+				<div class="anim"></div>
+				<button class="btn btn-note"></button>
+				<audio src="audio/b.wav"></audio>
+			</div>
+
+			<div id="cell_2" class="cell cell-note">
+				<div class="anim"></div>
+				<button class="btn btn-note"></button>
+				<audio src="audio/highc.wav"></audio>
+			</div>
+
+			<div id="cell_3" class="cell cell-note">
+				<div class="anim"></div>
+				<button class="btn btn-note"></button>
+				<audio src="audio/f.wav"></audio>
+			</div>	
+
+			<div id="cell_4" class="cell">
+				<div class="anim"></div>
+			</div>	
+
+			<div id="cell_5" class="cell cell-note">
+				<div class="anim"></div>
+				<button class="btn btn-note"></button>
+				<audio src="audio/g.wav"></audio>
+			</div>
+
+			<div id="cell_6" class="cell cell-note">
+				<div class="anim"></div>
+				<button class="btn btn-note"></button>
+				<audio src="audio/lowc.wav"></audio>
+			</div>
+
+			<div id="cell_7" class="cell cell-note">
+				<div class="anim"></div>
+				<button class="btn btn-note"></button>
+				<audio src="audio/d.wav"></audio>
+			</div>
+
+			<div id="cell_8" class="cell cell-note">
+				<div class="anim"></div>
+				<button class="btn btn-note"></button>
+				<audio src="audio/e.wav"></audio>
+			</div>
 		</div>
 
-		<div id="cell_1" class="cell">
-			<div class="anim"></div>
-			<button class="btn btn-note"></button>
-			<audio src="audio/107286__menegass__b-b0.wav"></audio>
-		</div>
+		<script src="main.js"></script>
 
-		<div id="cell_2" class="cell">
-			<div class="anim"></div>
-			<button class="btn btn-note"></button>
-			<audio src="audio/107290__menegass__b-c1.wav"></audio>
-		</div>
-
-		<div id="cell_3" class="cell">
-			<div class="anim"></div>
-			<button class="btn btn-note"></button>
-			<audio src="audio/107298__menegass__b-f0.wav"></audio>
-		</div>	
-
-		<div id="cell_4" class="cell">
-			<div class="anim"></div>
-			<button class="btn btn-note"></button>
-			<audio src="audio/107302__menegass__b-g0.wav"></audio>
-		</div>
-
-		<div id="cell_5" class="cell">
-			<div class="anim"></div>
-			<button class="btn btn-note"></button>
-			<audio src="audio/107289__menegass__b-c0.wav"></audio>
-		</div>
-
-		<div id="cell_6" class="cell">
-			<div class="anim"></div>
-			<button class="btn btn-note"></button>
-			<audio src="audio/107292__menegass__b-d0.wav"></audio>
-		</div>
-
-		<div id="cell_7" class="cell">
-			<div class="anim"></div>
-			<button class="btn btn-note"></button>
-			<audio src="audio/107296__menegass__b-e0.wav"></audio>
-		</div>
-	</div>
-
-	<script src="main.js"></script>
-</body>
+	</body>
 </html>

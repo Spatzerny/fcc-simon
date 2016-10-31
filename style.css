@@ -9,17 +9,15 @@
 
 /* order intended to keep the color difference between neighbouring buttons (360/8=+45deg), hsl color format makes that easier */
 #cell_0 .anim {background-color: hsl(0, 75%, 50%);}
-#cell_4 .anim {background-color: hsl(45, 75%, 50%);}
-#cell_5 .anim {background-color: hsl(90, 75%, 50%);}
+#cell_5 .anim {background-color: hsl(45, 75%, 50%);}
+#cell_6 .anim {background-color: hsl(90, 75%, 50%);}
 #cell_1 .anim {background-color: hsl(135, 75%, 50%);}
-#cell_7 .anim {background-color: hsl(180, 75%, 50%);}
+#cell_8 .anim {background-color: hsl(180, 75%, 50%);}
 #cell_3 .anim {background-color: hsl(225, 75%, 50%);}
 #cell_2 .anim {background-color: hsl(270, 75%, 50%);}
-#cell_6 .anim {background-color: hsl(315, 75%, 50%);}
+#cell_7 .anim {background-color: hsl(315, 75%, 50%);}
 
-/* because placing an additional cell in the middle would make for an exception for every time when all cells are considered - we just make that empty space*/ 
-#cell_4 {margin-left: 115px;}
-
+#cell_4 .anim {background-color: #eee}
 
 .anim {
 	position: absolute;
