@@ -1,3 +1,6 @@
+var PLAYBACK_DELAY = 350;
+
+
 var cells = document.getElementsByClassName('cell-note');
 var aud_wrong = document.getElementById('aud_wrong');
 var counter = document.getElementById('go');
@@ -16,24 +19,35 @@ function rand(min, max) {
 	return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function leftpad (str, len, ch) {
-  str = String(str);
-  var i = -1;
-  if (!ch && ch !== 0) ch = ' ';
-  len = len - str.length;
-  while (++i < len) {
-    str = ch + str;
-  }
-  return str;
+function leftpad(str, len, ch) {
+	str = String(str);
+	var i = -1;
+	if (!ch && ch !== 0) ch = ' ';
+	len = len - str.length;
+	while (++i < len) {
+		str = ch + str;
+	}
+	return str;
 }
 
-
+function shiftHue(n) {
+	n = Math.abs(n) % 360;
+	for (var i = 0, j = cells.length; i < j; i++) {
+		$(cells[i])
+			.find('.btn')
+			.css({
+				'background-color':
+				'hsl(' + (n+i*45) + ', 75%, 50%)'
+			})
+	}
+}
 
 
 //this object handles input sequence and game sequence
 function Sequence() {
 	var input = [],
-	ary = [];
+		playback = false,
+		ary = [];
 
 
 	this.reset = function() {
@@ -53,25 +67,30 @@ function Sequence() {
 
 	// play the sequence 
 	this.play = function() {
+		if (playback) {
+			return
+		}
+		playback = true;
 		var id = 0;
 		var loop = setInterval(function() {
 			playSound(ary[id]);
 			id++;
 
 			if (id >= ary.length) {
-				clearInterval(loop)
+				clearInterval(loop);
+				playback = false;
 			}
 
-		}, 400);
+		}, PLAYBACK_DELAY);
 	};
 
-	// compare input to the sequence
+	// compare argument(Array of inputs(Indexes)) to the sequence
 	this.compare = function() {
 		if (ary.length === 0) {
 			return;
 		}
 
-		if (input[input.length-1] === ary[input.length-1]) {
+		if (input[input.length - 1] === ary[input.length - 1]) {
 			if (input.length === ary.length) {
 				//CORRECT!
 				input = [];
@@ -96,26 +115,24 @@ var seq = new Sequence();
 
 
 
-
-
 //INPUT 
 //keyboard and mouse input listeners pass an index(Number) to the inputHandler()
 //which corresponds to the index of the element triggered in an group of class .cell-note
 //keyboard input
 $(window).on('keydown', function(e) {
-	var index = keybinds[e.which.toString()];
-	if (index || index === 0) {
-		inputHandler(index);
-	}
-})
-//mouse input 
+		var index = keybinds[e.which.toString()];
+		if (index || index === 0) {
+			inputHandler(index);
+		}
+	})
+	//mouse input 
 $('#btns').on('click', function(e) {
-	if ($(e.target).hasClass('btn-note')) {
-		var index = $(e.target).parent().index('.cell-note');
-		inputHandler(index);
-	}
-})
-//input handling
+		if ($(e.target).hasClass('btn-note')) {
+			var index = $(e.target).parent().index('.cell-note');
+			inputHandler(index);
+		}
+	})
+	//input handling
 function inputHandler(index) {
 	seq.insert(index);
 	if (index || index === 0) {
@@ -123,9 +140,6 @@ function inputHandler(index) {
 	}
 	seq.compare();
 }
-
-
-
 
 
 
@@ -157,4 +171,3 @@ $('#go').on('click', function() {
 	seq.add();
 	seq.play();
 });
-
