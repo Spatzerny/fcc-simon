@@ -1,4 +1,22 @@
-var PLAYBACK_DELAY = 200;
+//vue stuff
+
+var settings = new Vue({
+	el: '#settings',
+	data: {
+		PLAYBACK_DELAY : 300,
+		PLAYBACK_INTERVALS : false,
+		COLOR_SHIFT: 0
+	},
+	watch: {
+		COLOR_SHIFT: shiftHue
+	}
+})
+
+
+
+
+
+
 
 
 var cells = document.getElementsByClassName('cell-note');
@@ -36,8 +54,7 @@ function shiftHue(n) {
 		$(cells[i])
 			.find('.btn')
 			.css({
-				'background-color':
-				'hsl(' + (n+i*45) + ', 75%, 50%)'
+				'background-color': 'hsl(' + (n + i * 45) + ', 75%, 50%)'
 			})
 	}
 }
@@ -61,7 +78,7 @@ function Sequence() {
 
 	// add a random number to the sequence
 	this.add = function() {
-		ary.push([rand(0, 7),rand(1,3)]);
+		ary.push([rand(0, 7), rand(1, 3)]);
 		counter.innerHTML = leftpad(ary.length, 2, '0')
 	};
 
@@ -72,7 +89,7 @@ function Sequence() {
 		}
 		playback = true;
 
-		function looper() {
+		function loop() {
 			console.log(ary)
 			playSound(ary[id][0]);
 			id++;
@@ -80,13 +97,13 @@ function Sequence() {
 			if (id >= ary.length) {
 				playback = false;
 			} else {
-				setTimeout(looper, ary[id][1]*PLAYBACK_DELAY)
+				setTimeout(loop, (settings.PLAYBACK_INTERVALS ? ary[id][1] : 1) * settings.PLAYBACK_DELAY)
 			}
 
 		}
 
 		var id = 0;
-		setTimeout(looper, ary[id[1]]*PLAYBACK_DELAY);
+		setTimeout(loop, (settings.PLAYBACK_INTERVALS ? ary[id][1] : 1) * settings.PLAYBACK_DELAY);
 	};
 
 	// compare argument(Array of inputs(Indexes)) to the sequence
@@ -131,7 +148,7 @@ $(window).on('keydown', function(e) {
 		}
 	})
 	//mouse input 
-$('#btns').on('click', function(e) {
+$('.wrapper').on('click', function(e) {
 		if ($(e.target).hasClass('btn-note')) {
 			var index = $(e.target).parent().index('.cell-note');
 			inputHandler(index);
@@ -176,3 +193,15 @@ $('#go').on('click', function() {
 	seq.add();
 	seq.play();
 });
+
+
+
+
+
+
+
+
+
+
+
+

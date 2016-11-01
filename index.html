@@ -5,6 +5,7 @@
 		<meta charset="UTF-8">
 		<title>Document</title>
 		<script src="jquery-3.1.0.js"></script>
+		<script src="vue.js"></script>
 		<script src="https://use.fontawesome.com/a98a9a9a40.js"></script>
 		<link rel="stylesheet" href="style.css">
 	</head>
@@ -68,6 +69,23 @@
 			</div>
 
 		</div>
+
+
+		<div id="settings">
+			<label>playback delay
+				<input type="text" v-model="PLAYBACK_DELAY">
+			</label>
+			<label>playback intervals
+				<input type="checkbox" v-model="PLAYBACK_INTERVALS">
+			</label>
+			<label>color shift
+				<input type="text" v-model="COLOR_SHIFT">
+			</label>
+
+		</div>
+
+
+
 
 		<script src="main.js"></script>
 

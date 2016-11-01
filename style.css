@@ -66,3 +66,6 @@ body {
 	justify-content: center;
 	flex-wrap: wrap;
 }
+label {
+	display: block;
+}
