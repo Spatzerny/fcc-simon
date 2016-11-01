@@ -1,4 +1,4 @@
-var PLAYBACK_DELAY = 350;
+var PLAYBACK_DELAY = 200;
 
 
 var cells = document.getElementsByClassName('cell-note');
@@ -61,7 +61,7 @@ function Sequence() {
 
 	// add a random number to the sequence
 	this.add = function() {
-		ary.push(rand(0, 7));
+		ary.push([rand(0, 7),rand(1,3)]);
 		counter.innerHTML = leftpad(ary.length, 2, '0')
 	};
 
@@ -71,17 +71,22 @@ function Sequence() {
 			return
 		}
 		playback = true;
-		var id = 0;
-		var loop = setInterval(function() {
-			playSound(ary[id]);
+
+		function looper() {
+			console.log(ary)
+			playSound(ary[id][0]);
 			id++;
 
 			if (id >= ary.length) {
-				clearInterval(loop);
 				playback = false;
+			} else {
+				setTimeout(looper, ary[id][1]*PLAYBACK_DELAY)
 			}
 
-		}, PLAYBACK_DELAY);
+		}
+
+		var id = 0;
+		setTimeout(looper, ary[id[1]]*PLAYBACK_DELAY);
 	};
 
 	// compare argument(Array of inputs(Indexes)) to the sequence
@@ -90,7 +95,7 @@ function Sequence() {
 			return;
 		}
 
-		if (input[input.length - 1] === ary[input.length - 1]) {
+		if (input[input.length - 1] === ary[input.length - 1][0]) {
 			if (input.length === ary.length) {
 				//CORRECT!
 				input = [];
