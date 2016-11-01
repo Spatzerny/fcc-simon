@@ -7,26 +7,47 @@
 	height: 100%;
 }
 
+body {
+	background: #aaa;
+}
+
 /* order intended to keep the color difference between neighbouring buttons (360/8=+45deg), hsl color format makes that easier */
-#cell_0 .anim {background-color: hsl(0, 75%, 50%);}
-#cell_5 .anim {background-color: hsl(45, 75%, 50%);}
-#cell_6 .anim {background-color: hsl(90, 75%, 50%);}
-#cell_1 .anim {background-color: hsl(135, 75%, 50%);}
-#cell_8 .anim {background-color: hsl(180, 75%, 50%);}
-#cell_3 .anim {background-color: hsl(225, 75%, 50%);}
-#cell_2 .anim {background-color: hsl(270, 75%, 50%);}
-#cell_7 .anim {background-color: hsl(315, 75%, 50%);}
+#cell_0 .btn {background-color: hsl(0, 75%, 50%);}
+#cell_5 .btn {background-color: hsl(45, 75%, 50%);}
+#cell_6 .btn {background-color: hsl(90, 75%, 50%);}
+#cell_1 .btn {background-color: hsl(135, 75%, 50%);}
+#cell_8 .btn {background-color: hsl(180, 75%, 50%);}
+#cell_3 .btn {background-color: hsl(225, 75%, 50%);}
+#cell_2 .btn {background-color: hsl(270, 75%, 50%);}
+#cell_7 .btn {background-color: hsl(315, 75%, 50%);}
 
-#cell_4 .anim {background-color: #eee}
-
-.anim {
-	position: absolute;
-	left: 0;
-	top: 0;
+#cell_4 {
+	background-color: #eee;
+}
+#cell_4 button {
+	display: inline-block;
+	border: none;
+	background: none;
+	outline: none;
+	font-family: 'Lato', 'Open Sans';
+	font-weight: bold;
+	font-size: 12px;
+	padding: 0;
+}
+#cell_4 {
+	font-family: 'Lato', 'Open Sans';
+	font-weight: bold;
+	font-size: 12px;
+	padding: 10px;
+	width: 80px;
+	height: 80px;
+	display: flex;
+	align-content: space-between;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+#go {
 	width: 100%;
-	height: 100%;
-	z-index: -1;
-	border-radius: 2px;
 }
 
 .cell {
@@ -37,6 +58,9 @@
 }
 
 .s {
+	border-radius: 2px;
+	padding: 5px;
+	background: #eee;
 	width: 330px;
 	display: flex;
 	align-content: space-between;
@@ -45,5 +69,4 @@
 }
 
 #go {
-	float: left;
 }

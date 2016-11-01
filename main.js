@@ -1,5 +1,6 @@
 var cells = document.getElementsByClassName('cell-note');
-
+var aud_wrong = document.getElementById('aud_wrong');
+var counter = document.getElementById('go');
 var keybinds = {
 	'103': 0,
 	'104': 1,
@@ -15,48 +16,76 @@ function rand(min, max) {
 	return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+function leftpad (str, len, ch) {
+  str = String(str);
+  var i = -1;
+  if (!ch && ch !== 0) ch = ' ';
+  len = len - str.length;
+  while (++i < len) {
+    str = ch + str;
+  }
+  return str;
+}
 
+
+
+
+//this object handles input sequence and game sequence
 function Sequence() {
-	self = this; //ABHISEKP HALP WHY DOES THIS WORK WTF AM I DOING!? what happenes here?
-	this.input = [];
-	this.ary = [];
+	var input = [],
+	ary = [];
 
-	/* add a random number to the sequence */
+
+	this.reset = function() {
+		input = [];
+		ary = [];
+		counter.innerHTML = leftpad(ary.length, 2, '0');
+	}
+	this.insert = function(n) {
+		input.push(n);
+	}
+
+	// add a random number to the sequence
 	this.add = function() {
-		this.ary.push(rand(0, 7));
+		ary.push(rand(0, 7));
+		counter.innerHTML = leftpad(ary.length, 2, '0')
 	};
 
-	/* play the sequence */
+	// play the sequence 
 	this.play = function() {
 		var id = 0;
 		var loop = setInterval(function() {
-			playSound(self.ary[id]);
+			playSound(ary[id]);
 			id++;
 
-			if (id >= self.ary.length) {
+			if (id >= ary.length) {
 				clearInterval(loop)
 			}
 
 		}, 400);
 	};
 
-	/* compare input to the sequence */
+	// compare input to the sequence
 	this.compare = function() {
-		if (this.input[this.input.length-1] === this.ary[this.input.length-1]) {
-			if (this.input.length === this.ary.length) {
-				//CORRECT!
-				console.log('correct!')
-				seq.input = [];
-				seq.add();
+		if (ary.length === 0) {
+			return;
+		}
 
-				setTimeout(seq.play, 450);
+		if (input[input.length-1] === ary[input.length-1]) {
+			if (input.length === ary.length) {
+				//CORRECT!
+				input = [];
+				this.add();
+
+				setTimeout(this.play, 450);
 				return;
 			}
 		} else {
 			//WRONG
-			console.log('wrong!')
-			seq.input = [];
-			setTimeout(seq.play, 450);
+			aud_wrong.currentTime = 0;
+			aud_wrong.play();
+			input = [];
+			setTimeout(this.play, 450);
 			return;
 		}
 	}
@@ -65,56 +94,51 @@ function Sequence() {
 
 var seq = new Sequence();
 
-/*
-keyboard input 
-passes an index(Number) to the inputHandler()
-*/
 
+
+
+
+//INPUT 
+//keyboard and mouse input listeners pass an index(Number) to the inputHandler()
+//which corresponds to the index of the element triggered in an group of class .cell-note
+//keyboard input
 $(window).on('keydown', function(e) {
-	var keyindex = keybinds[e.which.toString()];
-	if (keyindex || keyindex === 0) {
-		inputHandler(keyindex);
+	var index = keybinds[e.which.toString()];
+	if (index || index === 0) {
+		inputHandler(index);
 	}
 })
-
-/*
-mouse input 
-passes an index(Number) to the inputHandler()
-*/
-
+//mouse input 
 $('#btns').on('click', function(e) {
 	if ($(e.target).hasClass('btn-note')) {
-		inputHandler($(e.target).parent().index('.cell-note'));
+		var index = $(e.target).parent().index('.cell-note');
+		inputHandler(index);
 	}
 })
-
-/*
-input handling
-*/
-
+//input handling
 function inputHandler(index) {
-	seq.input.push(index);
+	seq.insert(index);
 	if (index || index === 0) {
 		playSound(index);
 	}
-	if (seq.ary.length > 0) {
-		seq.compare();
-	}
+	seq.compare();
 }
 
-/*
-animation and sound
-*/
 
+
+
+
+
+//animation and sound
 function playSound(cell) {
 	cell = $(cells[cell]);
 
-	cell.find('.anim').animate({
+	cell.find('.btn').animate({
 		width: '110px',
 		height: '110px',
 		margin: '-5px'
 	}, 100, function() {
-		cell.find('.anim').animate({
+		cell.find('.btn').animate({
 			width: '100px',
 			height: '100px',
 			margin: '0'
@@ -126,9 +150,11 @@ function playSound(cell) {
 	aud.play();
 }
 
+
+//start / reset
 $('#go').on('click', function() {
+	seq.reset();
 	seq.add();
 	seq.play();
-	input = [];
 });
 

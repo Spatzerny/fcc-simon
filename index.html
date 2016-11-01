@@ -5,70 +5,68 @@
 		<meta charset="UTF-8">
 		<title>Document</title>
 		<script src="jquery-3.1.0.js"></script>
+		<script src="https://use.fontawesome.com/a98a9a9a40.js"></script>
 		<link rel="stylesheet" href="style.css">
 	</head>
 
 	<body>
-		<pre>
-		supports numpad input, no key remapping yet
-		no audio compression done so files might load a while
-		also refresh if you want to reset
-		<button id="go">go</button>
-		</pre>
+
+		<audio id="aud_wrong" src="audio/wrong.mp3"></audio>
 
 		<div id="btns" class='s'>
 
 			<div id="cell_0" class="cell cell-note">
-				<div class="anim"></div>
 				<button data-note-id="0" class="btn btn-note"></button>
-				<audio src="audio/a.wav"></audio>
+				<audio src="audio/a.mp3"></audio>
 			</div>
 
 			<div id="cell_1" class="cell cell-note">
-				<div class="anim"></div>
 				<button class="btn btn-note"></button>
-				<audio src="audio/b.wav"></audio>
+				<audio src="audio/b.mp3"></audio>
 			</div>
 
 			<div id="cell_2" class="cell cell-note">
-				<div class="anim"></div>
 				<button class="btn btn-note"></button>
-				<audio src="audio/highc.wav"></audio>
+				<audio src="audio/highc.mp3"></audio>
 			</div>
 
 			<div id="cell_3" class="cell cell-note">
-				<div class="anim"></div>
 				<button class="btn btn-note"></button>
-				<audio src="audio/f.wav"></audio>
+				<audio src="audio/f.mp3"></audio>
 			</div>	
 
 			<div id="cell_4" class="cell">
-				<div class="anim"></div>
+				<button>
+					<i class="fa fa-info" aria-hidden="true"></i>
+				</button>
+				<button>
+					<i class="fa fa-cog" aria-hidden="true"></i>
+				</button>
+				<button id="go">00</button>
+				<button>strict</button>
+				<span>start</span>
 			</div>	
 
 			<div id="cell_5" class="cell cell-note">
-				<div class="anim"></div>
 				<button class="btn btn-note"></button>
-				<audio src="audio/g.wav"></audio>
+				<audio src="audio/g.mp3"></audio>
 			</div>
 
 			<div id="cell_6" class="cell cell-note">
-				<div class="anim"></div>
 				<button class="btn btn-note"></button>
-				<audio src="audio/lowc.wav"></audio>
+				<audio src="audio/lowc.mp3"></audio>
 			</div>
 
 			<div id="cell_7" class="cell cell-note">
-				<div class="anim"></div>
 				<button class="btn btn-note"></button>
-				<audio src="audio/d.wav"></audio>
+				<audio src="audio/d.mp3"></audio>
 			</div>
 
 			<div id="cell_8" class="cell cell-note">
-				<div class="anim"></div>
 				<button class="btn btn-note"></button>
-				<audio src="audio/e.wav"></audio>
+				<audio src="audio/e.mp3"></audio>
 			</div>
+
 		</div>
 
 		<script src="main.js"></script>
